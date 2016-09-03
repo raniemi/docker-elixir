@@ -7,3 +7,7 @@ The [Docker](https://www.docker.com/) image builds are executed by [Travis CI](h
 
 Copies of the [Erlang Solutions](https://www.erlang-solutions.com/resources/download.html) packaging are managed on [Bintray](https://bintray.com/raniemi/erlang-solutions-unofficial-mirror) for performance and availability reasons.
 
+Currently only the latest version of [Ubuntu](http://www.ubuntu.com/) is supported.
+
+
+

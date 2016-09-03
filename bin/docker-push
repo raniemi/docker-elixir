@@ -18,14 +18,16 @@ fi
 
 versions=(${BRANCH//\// })
 
-if [ ${#versions[@]} -ne 2 ]; then
-  echo "ERROR: Expected the branch to be of the format ELIXIR_VERSION/ERLANG_VERSION"
+if [ ${#versions[@]} -ne 4 ]; then
+  echo "ERROR: Expected the branch to be of the format ELIXIR_VERSION/ERLANG_VERSION/LINUX_DISTRIBUTION/DISTRIBUTION_RELEASE"
   exit 1
 fi
 
 ELIXIR_VERSION="${versions[0]}"
 ERLANG_VERSION="${versions[1]}"
-TAG="${ELIXIR_VERSION}_${ERLANG_VERSION}"
+LINUX_DISTRIBUTION="${versions[2]}"
+DISTRIBUTION_RELEASE="${versions[3]}"
+TAG="${ELIXIR_VERSION}_${ERLANG_VERSION}_${LINUX_DISTRIBUTION}_${DISTRIBUTION_RELEASE}"
 
 if [[ -z $DOCKER_USERNAME || -z $DOCKER_PASSWORD ]]; then
   echo "ERROR: In order to push to Docker Hub, you need to set the DOCKER_EMAIL, DOCKER_USERNAME, and DOCKER_PASSWORD environment variables"
