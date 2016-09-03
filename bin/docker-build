@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+OWNER=$1
+PROJECT=$2
+
+if [[ -z $OWNER || -z $PROJECT ]]; then
+  (>&2 echo "ERROR: Expected the Docker image 'owner' and 'project' to be passed in!" )
+  exit 1
+fi
+
+REPOSITORY=$OWNER/$PROJECT
+BRANCH=$TRAVIS_BRANCH
+
+if [ "$BRANCH" == "master" ]; then
+  echo "INFO: Docker container builds can only happen on versioned branches"
+  exit 0
+fi
+
+versions=(${BRANCH//\// })
+
+if [ ${#versions[@]} -ne 2 ]; then
+  echo "ERROR: Expected the branch to be of the format ELIXIR_VERSION/ERLANG_VERSION"
+  exit 1
+fi
+
+ELIXIR_VERSION="${versions[0]}"
+ERLANG_VERSION="${versions[1]}"
+TAG="${ELIXIR_VERSION}_${ERLANG_VERSION}"
+
+docker build \
+  -t $REPOSITORY:$TAG \
+  --build-arg ELIXIR_VERSION=$ELIXIR_VERSION \
+  --build-arg ERLANG_VERSION=$ERLANG_VERSION \
+  .

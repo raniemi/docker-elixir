@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - ./bin/docker-build raniemi elixir
+
+after_success:
+  - ./bin/docker-push raniemi elixir
+
+notifications:
+  recipients:
+    - dev@lone-cyprus.com

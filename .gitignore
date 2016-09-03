@@ -1,5 +1,13 @@
 /_build
-/cover
 /deps
 erl_crash.dump
 *.ez
+/cover
+/doc
+/docs
+coveralls.json
+*.swp
+/.mix
+
+*.deb
+.DS_Store
