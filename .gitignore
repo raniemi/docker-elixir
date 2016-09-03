@@ -11,3 +11,4 @@ coveralls.json
 
 *.deb
 .DS_Store
+Dockerfile.generated
