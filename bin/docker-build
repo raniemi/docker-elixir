@@ -16,6 +16,13 @@ if [ "$BRANCH" == "master" ]; then
   exit 0
 fi
 
+PULL_REQUEST=${TRAVIS_PULL_REQUEST:-false} 
+
+if [ "$PULL_REQUEST" != "false" ]; then
+  echo "INFO: Docker container pushes cannot happend on pull requests"
+  exit 0
+fi
+
 versions=(${BRANCH//\// })
 
 if [ ${#versions[@]} -ne 4 ]; then
@@ -29,7 +36,11 @@ LINUX_DISTRIBUTION="${versions[2]}"
 DISTRIBUTION_RELEASE="${versions[3]}"
 TAG="${ELIXIR_VERSION}_${ERLANG_VERSION}_${LINUX_DISTRIBUTION}_${DISTRIBUTION_RELEASE}"
 
+# NOTE: since we can't pass these arguments into the docker build, we need to do this instead
+cat <(echo "FROM $LINUX_DISTRIBUTION:$DISTRIBUTION_RELEASE") Dockerfile.partial > Dockerfile.generated
+
 docker build \
+  -f Dockerfile.generated \
   -t $REPOSITORY:$TAG \
   --build-arg ELIXIR_VERSION=$ELIXIR_VERSION \
   --build-arg ERLANG_VERSION=$ERLANG_VERSION \
