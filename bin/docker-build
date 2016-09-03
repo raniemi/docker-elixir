@@ -16,6 +16,13 @@ if [ "$BRANCH" == "master" ]; then
   exit 0
 fi
 
+PULL_REQUEST=${TRAVIS_PULL_REQUEST:-false} 
+
+if [ "$PULL_REQUEST" != "false" ]; then
+  echo "INFO: Docker container pushes cannot happend on pull requests"
+  exit 0
+fi
+
 versions=(${BRANCH//\// })
 
 if [ ${#versions[@]} -ne 4 ]; then
