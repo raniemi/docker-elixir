@@ -1,0 +1,21 @@
+#!/bin/bash
+set -e
+ARGS=$@
+OWNER=${OWNER:-raniemi}
+PROJECT=${OWNER:-docker-elixir}
+SRC_DIR=/usr/local/src
+
+REPOSITORY=$OWNER/$PROJECT
+CONTAINER_HOME=$SRC_DIR/$PROJECT
+
+docker run \
+       -it \
+       --rm \
+       --name $PROJECT \
+       -e BINTRAY_USERNAME=$BINTRAY_USERNAME \
+       -e BINTRAY_REPOSITORY=$BINTRAY_REPOSITORY \
+       -e BINTRAY_API_TOKEN=$BINTRAY_API_TOKEN \
+       -v "$PWD":$CONTAINER_HOME \
+       -w $CONTAINER_HOME \
+       $REPOSITORY \
+       bash -c "$ARGS"
