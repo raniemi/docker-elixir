@@ -22,7 +22,7 @@ ENV LC_ALL en_US.UTF-8
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         curl \
         lsb-release \
-        libwxgtk3.0-dev \
+        libwxgtk2.8-dev \
         libglu-dev
 
 # Add repository mirror
