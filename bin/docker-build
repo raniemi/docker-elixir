@@ -34,6 +34,7 @@ ELIXIR_VERSION="${versions[0]}"
 ERLANG_VERSION="${versions[1]}"
 LINUX_DISTRIBUTION="${versions[2]}"
 DISTRIBUTION_RELEASE="${versions[3]}"
+ARCHITECTURE=amd64
 TAG="${ELIXIR_VERSION}_${ERLANG_VERSION}_${LINUX_DISTRIBUTION}_${DISTRIBUTION_RELEASE}"
 
 # NOTE: since we can't pass these arguments into the docker build, we need to do this instead
@@ -44,4 +45,6 @@ docker build \
   -t $REPOSITORY:$TAG \
   --build-arg ELIXIR_VERSION=$ELIXIR_VERSION \
   --build-arg ERLANG_VERSION=$ERLANG_VERSION \
+  --build-arg OS=$LINUX_DISTRIBUTION \
+  --build-arg ARCH=$ARCHITECTURE \
   .

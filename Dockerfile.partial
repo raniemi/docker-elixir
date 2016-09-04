@@ -4,6 +4,8 @@
 
 ARG ERLANG_VERSION=19.0.3
 ARG ELIXIR_VERSION=1.3.2
+ARG OS=ubuntu
+ARG ARCH=amd64
 
 # Based on 
 #  https://github.com/marcelocg/phoenix-docker
@@ -32,11 +34,11 @@ RUN export DISTRIBUTION=`lsb_release -sc` \
  && echo "deb $ES_MIRROR $DISTRIBUTION $COMPONENTS" | tee -a /etc/apt/sources.list
 
 # install specific version of Erlang from Erlang Solutions
-RUN export ERLANG_DEB=esl-erlang_$ERLANG_VERSION-1~ubuntu~`lsb_release -sc`_amd64.deb \
+RUN export ERLANG_DEB=esl-erlang_$ERLANG_VERSION-1~$OS~`lsb_release -sc`_$ARCH.deb \
  && curl -L "$ES_MIRROR/$ERLANG_DEB" -o $ERLANG_DEB \
  && dpkg -i $ERLANG_DEB
 
 # install specific version of Elixir from Erlang Solutions
-RUN export ELIXIR_DEB=elixir_$ELIXIR_VERSION-1~ubuntu~`lsb_release -sc`_amd64.deb \
+RUN export ELIXIR_DEB=elixir_$ELIXIR_VERSION-1~$OS~`lsb_release -sc`_$ARCH.deb \
  && curl -L "$ES_MIRROR/$ELIXIR_DEB" -o $ELIXIR_DEB \
  && dpkg -i $ELIXIR_DEB

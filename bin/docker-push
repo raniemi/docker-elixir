@@ -37,7 +37,7 @@ DISTRIBUTION_RELEASE="${versions[3]}"
 TAG="${ELIXIR_VERSION}_${ERLANG_VERSION}_${LINUX_DISTRIBUTION}_${DISTRIBUTION_RELEASE}"
 
 if [[ -z $DOCKER_USERNAME || -z $DOCKER_PASSWORD ]]; then
-  echo "ERROR: In order to push to Docker Hub, you need to set the DOCKER_EMAIL, DOCKER_USERNAME, and DOCKER_PASSWORD environment variables"
+  echo "ERROR: In order to push to Docker Hub, you need to set the DOCKER_USERNAME and DOCKER_PASSWORD environment variables"
   exit 1
 fi
 
