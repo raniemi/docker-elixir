@@ -26,7 +26,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         libglu-dev
 
 # Add repository mirror
-ARG ES_MIRROR=https://dl.bintray.com/raniemi/erlang-solutions-unofficial-mirror
+ARG ES_MIRROR=http://dl.bintray.com/raniemi/erlang-solutions-unofficial-mirror
 ARG COMPONENTS=contrib
 RUN export DISTRIBUTION=`lsb_release -sc` \
  && echo "deb $ES_MIRROR $DISTRIBUTION $COMPONENTS" | tee -a /etc/apt/sources.list
