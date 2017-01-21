@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         curl \
         lsb-release \
         locales \
-        libwxgtk3.0-dev \
+        libwxgtk2.8-dev \
         libsctp1 \
         libglu-dev
 
@@ -36,13 +36,11 @@ RUN export DISTRIBUTION=`lsb_release -sc` \
  && echo "deb $ES_MIRROR $DISTRIBUTION $COMPONENTS" | tee -a /etc/apt/sources.list
 
 # install specific version of Erlang from Erlang Solutions
-RUN ERLANG_PACKAGE_VERSION=$(test "${ERLANG_VERSION#*-}" != "$ERLANG_VERSION" && echo "" || echo "-1") \
- && export ERLANG_DEB=esl-erlang_$ERLANG_VERSION$ERLANG_PACKAGE_VERSION~$OS~`lsb_release -sc`_$ARCH.deb \
+RUN export ERLANG_DEB=esl-erlang_$ERLANG_VERSION-1~$OS~`lsb_release -sc`_$ARCH.deb \
  && curl -L "$ES_MIRROR/$ERLANG_DEB" -o $ERLANG_DEB \
  && dpkg -i $ERLANG_DEB
 
 # install specific version of Elixir from Erlang Solutions
-RUN ELIXIR_PACKAGE_VERSION=$(test "${ELIXIR_VERSION#*-}" != "$ELIXIR_VERSION" && echo "" || echo "-1") \
- && export ELIXIR_DEB=elixir_$ELIXIR_VERSION$ELIXIR_PACKAGE_VERSION~$OS~`lsb_release -sc`_$ARCH.deb \
+RUN export ELIXIR_DEB=elixir_$ELIXIR_VERSION-1~$OS~`lsb_release -sc`_$ARCH.deb \
  && curl -L "$ES_MIRROR/$ELIXIR_DEB" -o $ELIXIR_DEB \
  && dpkg -i $ELIXIR_DEB
