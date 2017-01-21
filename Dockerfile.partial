@@ -19,7 +19,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         curl \
         lsb-release \
         locales \
-        libwxgtk3.0-dev \
+        libwxgtk2.8-dev \
+        libsctp1 \
         libglu-dev
 
 # Elixir requires UTF-8
