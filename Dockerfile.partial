@@ -21,7 +21,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         locales \
         procps \
         libwxgtk3.0-dev \
-        libssl \
+        libssl-dev \
         libglu-dev
 
 # Elixir requires UTF-8
